@@ -12,26 +12,29 @@ correctamente. Tenga en cuenta datos faltantes y duplicados.
 
 def clean_data():
     
-    df = pd.read_csv("solicitudes_credito.csv", sep=";",index_col= 0)
-    df["sexo"] = df["sexo"].str.lower()
-    df["sexo"] = df["sexo"].str.strip()
+    df = pd.read_csv("solicitudes_credito.csv", sep=";",index_col= 0, encoding="utf-8")
 
-    df["tipo_de_emprendimiento"] = df["tipo_de_emprendimiento"].str.lower()
-    df["tipo_de_emprendimiento"] = df["tipo_de_emprendimiento"].str.strip()
+    df = df.dropna()
 
-    df["idea_negocio"] = df["idea_negocio"].str.lower()
-    df["idea_negocio"] = df["idea_negocio"].str.strip()
-    df["idea_negocio"] = df["idea_negocio"].str.replace("_", " ")
-    df["idea_negocio"] = df["idea_negocio"].str.replace("-", " ")
-    df["idea_negocio"] = df["idea_negocio"].str.replace("__", " ")
-    df["idea_negocio"] = df["idea_negocio"].str.replace("  ", " ")
+    df["sexo"] = df.sexo.str.lower()
+    df["sexo"] = df.sexo.str.strip()
 
-    df["barrio"] = df["barrio"].str.lower()
-    df["barrio"] = df["barrio"].str.strip()
-    df["barrio"] = df["barrio"].str.replace("_", " ")
-    df["barrio"] = df["barrio"].str.replace("-", " ")
-    df["barrio"] = df["barrio"].str.replace("__", " ")
-    df["barrio"] = df["barrio"].str.replace("  ", " ")
+    df["tipo_de_emprendimiento"] = df.tipo_de_emprendimiento.str.lower()
+    df["tipo_de_emprendimiento"] = df.tipo_de_emprendimiento.str.strip()
+
+    df["idea_negocio"] = df.idea_negocio.str.lower()
+    df["idea_negocio"] = df.idea_negocio.str.strip()
+    df["idea_negocio"] = df.idea_negocio.str.replace("_", " ")
+    df["idea_negocio"] = df.idea_negocio.str.replace("-", " ")
+    df["idea_negocio"] = df.idea_negocio.str.replace("__", " ")
+    df["idea_negocio"] = df.idea_negocio.str.replace("  ", " ")
+
+    df["barrio"] = df.barrio.str.lower()
+    df["barrio"] = df.barrio.str.strip()
+    df["barrio"] = df.barrio.str.replace("_", " ")
+    df["barrio"] = df.barrio.str.replace("-", " ")
+    df["barrio"] = df.barrio.str.replace("__", " ")
+    df["barrio"] = df.barrio.str.replace("  ", " ")
 
     def clean_currency(x):
         if isinstance(x, str):
@@ -39,7 +42,7 @@ def clean_data():
 
         return(x)
 
-    df['monto_del_credito'] = df['monto_del_credito'].apply(clean_currency).astype('float')
+    df['monto_del_credito'] = df.monto_del_credito.apply(clean_currency).astype('float')
 
 
     for date in df["fecha_de_beneficio"]:
@@ -50,13 +53,13 @@ def clean_data():
 
 
 
-    df["línea_credito"] = df["línea_credito"].str.lower()
-    df["línea_credito"] = df["línea_credito"].str.replace("_", " ")
-    df["línea_credito"] = df["línea_credito"].str.replace("-", " ")
-    df["línea_credito"] = df["línea_credito"].str.replace("__", " ")
+    df["línea_credito"] = df.línea_credito.str.lower()
+    df["línea_credito"] = df.línea_credito.str.replace("_", " ")
+    df["línea_credito"] = df.línea_credito.str.replace("-", " ")
+    df["línea_credito"] = df.línea_credito.str.replace("__", " ")
 
     df = df.drop_duplicates()
 
     return df
 
-
+clean_data()
