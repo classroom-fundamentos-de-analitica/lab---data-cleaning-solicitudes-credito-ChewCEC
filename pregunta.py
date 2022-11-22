@@ -59,10 +59,4 @@ def clean_data():
 
     return df
 
-if __name__ == "__main__":
-    print(clean_data().head(0))
-    # print()
-    # print(clean_data()[""].value_counts())
-    # print()
-    #Create a new csv file with the cleaned data
-    clean_data().to_csv("solicitudes_credito_clean.csv", sep= ",")
+
